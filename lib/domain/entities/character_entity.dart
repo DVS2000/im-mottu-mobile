@@ -1,18 +1,18 @@
 class CharacterEntity {
+  final int? id;
   final String? name;
   final String? description;
-  final String? thumbnail;
+  final String? thumbnailPath;
   final String? thumbnailExtension;
-  final List<CharacterEntity> recommendedList;
 
-  CharacterEntity(this.name, this.description, this.thumbnail, this.thumbnailExtension, this.recommendedList);
+  CharacterEntity({this.id, this.name, this.description, this.thumbnailPath, this.thumbnailExtension});
 
 
   String? getUrlImg() {
-    if(thumbnail == null || thumbnailExtension == null) {
+    if(thumbnailPath == null || thumbnailExtension == null) {
       return null;
     } else {
-      return "$thumbnail.$thumbnailExtension";
+      return "$thumbnailPath.$thumbnailExtension";
     }
   }
 }
