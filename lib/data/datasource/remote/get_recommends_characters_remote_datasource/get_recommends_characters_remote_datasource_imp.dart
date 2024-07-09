@@ -1,20 +1,21 @@
 import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:marvel/configs/app_config.dart';
 import 'package:marvel/data/dtos/character_dto.dart';
 import 'package:marvel/domain/entities/character_entity.dart';
 import 'package:marvel/domain/exceptions/character_exception.dart';
 import 'package:marvel/drivers/client_http_driver/client_http_driver.dart';
-import 'search_characters_by_name_remote_datasource.dart';
+import 'get_recommends_characters_remote_datasource.dart';
 
-class SearchCharactersByNameRemoteDatasourceImp implements SearchCharactersByNameRemoteDatasource {
+class GetRecommendsCharactersRemoteDatasourceImp implements GetRecommendsCharactersRemoteDatasource {
   final ClientHttpDriver _clientHttpDriver;
-  SearchCharactersByNameRemoteDatasourceImp(this._clientHttpDriver);
+  GetRecommendsCharactersRemoteDatasourceImp(this._clientHttpDriver);
 
   @override
-  Future<Either<CharacterException, List<CharacterEntity>>> call({required String name, required int offset, required int limit}) async  {
+  Future<Either<CharacterException, List<CharacterEntity>>> call({required int characterId}) async {
     final response = await _clientHttpDriver.get(
-      route: "/characters?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit&nameStartsWith=$name", 
+      route: "/characters/$characterId/comics?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}", 
       headers: { "Content-Type": "application/json" }
     );
 
@@ -32,4 +33,5 @@ class SearchCharactersByNameRemoteDatasourceImp implements SearchCharactersByNam
       
     }
   }
+  
 }
