@@ -5,16 +5,16 @@ import 'package:marvel/data/dtos/character_dto.dart';
 import 'package:marvel/domain/entities/character_entity.dart';
 import 'package:marvel/domain/exceptions/character_exception.dart';
 import 'package:marvel/drivers/client_http_driver/client_http_driver.dart';
-import 'get_characters_remote_datasource.dart';
+import 'search_characters_by_name_remote_datasource.dart';
 
-class GetCharactersRemoteDatasourceImp implements GetCharactersRemoteDatasource {
+class SearchCharactersByNameRemoteDatasourceImp implements SearchCharactersByNameRemoteDatasource {
   final ClientHttpDriver _clientHttpDriver;
-  GetCharactersRemoteDatasourceImp(this._clientHttpDriver);
+  SearchCharactersByNameRemoteDatasourceImp(this._clientHttpDriver);
 
   @override
-  Future<Either<CharacterException, List<CharacterEntity>>> call({required int offset, required int limit}) async {
+  Future<Either<CharacterException, List<CharacterEntity>>> call({required String name, required int offset, required int limit}) async  {
     final response = await _clientHttpDriver.get(
-      route: "/characters?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit", 
+      route: "/characters?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit&nameStartsWith=$name", 
       headers: { "Content-Type": "application/json" }
     );
 
