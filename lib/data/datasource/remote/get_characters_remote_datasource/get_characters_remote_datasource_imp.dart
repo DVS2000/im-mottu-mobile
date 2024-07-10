@@ -14,7 +14,7 @@ class GetCharactersRemoteDatasourceImp implements GetCharactersRemoteDatasource 
   @override
   Future<Either<CharacterException, List<CharacterEntity>>> call({required int offset, required int limit}) async {
     final response = await _clientHttpDriver.get(
-      route: "/characters?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit", 
+      route: "/characters?ts=${DateTime.now().millisecondsSinceEpoch}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit", 
       headers: { "Content-Type": "application/json" }
     );
 
@@ -28,7 +28,7 @@ class GetCharactersRemoteDatasourceImp implements GetCharactersRemoteDatasource 
       );
 
     } else {
-      return Left(CharacterException(response.statusCode, "Ocorreu um erro, tente mais tarde"));
+      return Left(CharacterException(response.statusCode, json.decode(response.body)["message"]));
       
     }
   }

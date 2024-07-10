@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:marvel/domain/entities/character_entity.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 
 class CardCharactersComponent extends StatelessWidget {
-  const CardCharactersComponent({super.key});
+  final CharacterEntity characterEntity;
+  const CardCharactersComponent({super.key, required this.characterEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +33,19 @@ class CardCharactersComponent extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              ConstsUtils.iSpider,
-              fit: BoxFit.cover,
-              height: context.sizedDevice.height / 7,
-              width: context.sizedDevice.width / 4,
-            ),
+            child: characterEntity.getUrlImg() == null ?
+              Container(
+                color: Colors.grey.withOpacity(.1),
+              )
+            : FadeInImage(
+              placeholder: const AssetImage(ConstsUtils.placeHolder),
+                image: CachedNetworkImageProvider(
+                  characterEntity.getUrlImg() ?? 'https://via.placeholder.com/350x150',
+                ),
+                fit: BoxFit.cover,
+                height: context.sizedDevice.height / 7,
+                width: context.sizedDevice.width / 4,
+              ),
           ),
           const SizedBox(width: 10,),
 
@@ -46,7 +55,7 @@ class CardCharactersComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Spider-Man",
+                  characterEntity.name ?? "Sem nome",
                   style: TextStyle(
                     fontFamily: ConstsUtils.fBold,
                     fontSize: context.sizedDevice.height / 35
@@ -54,7 +63,9 @@ class CardCharactersComponent extends StatelessWidget {
                 ),
             
                 Text(
-                  '''O Homem-Aranha (Spider-Man) é um super-herói fictício criado por Stan Lee e Steve Ditko...''',
+                  characterEntity.description == null || characterEntity.description == ""
+                    ? "Sem descrição disponível"
+                    : "${characterEntity.description!.length < 40 ? characterEntity.description : (characterEntity.description ?? "").substring(0, 40)}...",
                   style: TextStyle(
                     fontFamily: ConstsUtils.fRegular,
                     fontSize: context.sizedDevice.height / 50

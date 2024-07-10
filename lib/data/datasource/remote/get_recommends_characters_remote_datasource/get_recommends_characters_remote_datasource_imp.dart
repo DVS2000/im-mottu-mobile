@@ -15,7 +15,7 @@ class GetRecommendsCharactersRemoteDatasourceImp implements GetRecommendsCharact
   @override
   Future<Either<CharacterException, List<CharacterEntity>>> call({required int characterId}) async {
     final response = await _clientHttpDriver.get(
-      route: "/characters/$characterId/comics?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}", 
+      route: "/characters/$characterId/comics?ts=${DateTime.now().millisecondsSinceEpoch}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}", 
       headers: { "Content-Type": "application/json" }
     );
 

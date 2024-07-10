@@ -19,6 +19,7 @@ import 'package:marvel/domain/usecases/search_characters_usecase/search_characte
 import 'package:marvel/domain/usecases/search_characters_usecase/search_characters_by_name_usecase_imp.dart';
 import 'package:marvel/drivers/client_http_driver/client_http_driver.dart';
 import 'package:marvel/drivers/client_http_driver/client_http_driver_imp.dart';
+import 'package:marvel/presentation/controllers/character_controller.dart';
 
 class Inject {
   Inject._();
@@ -44,5 +45,8 @@ class Inject {
     getIt.registerLazySingleton<GetRecommendsCharactersUsecase>(() => GetRecommendsCharactersUsecaseImp(getIt()));
     getIt.registerLazySingleton<SearchCharactersByNameUsecase>(() => SearchCharactersByNameUsecaseImp(getIt()));
 
+
+    // Controllers
+    getIt.registerLazySingleton<CharacterController>(() => CharacterController(getIt()));
   }
 }

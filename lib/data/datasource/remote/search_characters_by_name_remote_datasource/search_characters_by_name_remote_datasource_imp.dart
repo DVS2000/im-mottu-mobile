@@ -14,7 +14,7 @@ class SearchCharactersByNameRemoteDatasourceImp implements SearchCharactersByNam
   @override
   Future<Either<CharacterException, List<CharacterEntity>>> call({required String name, required int offset, required int limit}) async  {
     final response = await _clientHttpDriver.get(
-      route: "/characters?ts=${DateTime.now()}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit&nameStartsWith=$name", 
+      route: "/characters?ts=${DateTime.now().millisecondsSinceEpoch}&apikey=${AppConfigs.marvelPublicKey}&hash=${AppConfigs.getHashMd5()}&offset=$offset&limit=$limit&nameStartsWith=$name", 
       headers: { "Content-Type": "application/json" }
     );
 

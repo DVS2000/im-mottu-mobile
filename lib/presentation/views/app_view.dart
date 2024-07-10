@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marvel/presentation/views/pages/details_character_page/details_character_page.dart';
+import 'package:get/get.dart';
+import 'package:marvel/presentation/views/pages/splash_page/splash_page.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 
 class AppView extends StatelessWidget {
@@ -7,13 +8,13 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: "Marvel App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
         primaryColor: ConstsUtils.primaryColor
       ),
-      home: const DetailsCharacterPage(),
+      home: const SplashPage(),
     );
   }
 }

@@ -14,11 +14,13 @@ class AppConfigs {
   static const marvelPrivateKey = "11504170115215020d9a796acb2b325f9d03d023";
 
   static String getHashMd5() {
-    return md5.convert(
+    String data = md5.convert(
       utf8.encode(
-        "${DateTime.now()}$marvelPrivateKey$marvelPublicKey"
+        "${DateTime.now().millisecondsSinceEpoch}$marvelPrivateKey$marvelPublicKey"
       )
     ).toString();
+
+    return data;
   }
 
 }

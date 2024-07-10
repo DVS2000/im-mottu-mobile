@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 

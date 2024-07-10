@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:marvel/presentation/components/custom_button_component.dart';
+import 'package:marvel/presentation/views/pages/home_page/home_page.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 
@@ -108,8 +110,9 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                   const SizedBox(height: 20,),
 
-                  const CustomButtonComponent(
+                  CustomButtonComponent(
                     title: "Começar a Aventura",
+                    onTap: () => Get.to(const HomePage()),
                   ),
                 ],
               ),
