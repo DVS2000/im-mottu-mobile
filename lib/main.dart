@@ -4,7 +4,9 @@ void main() {
   runApp(
     const MaterialApp(
       title: "Marvel App",
-      home: Scaffold(),
+      home: Scaffold(
+        backgroundColor: Colors.white,
+      ),
     )
   );
 }
