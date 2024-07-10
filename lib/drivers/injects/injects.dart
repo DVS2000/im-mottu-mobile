@@ -47,6 +47,6 @@ class Inject {
 
 
     // Controllers
-    getIt.registerLazySingleton<CharacterController>(() => CharacterController(getIt()));
+    getIt.registerLazySingleton<CharacterController>(() => CharacterController(getIt(), getIt()));
   }
 }

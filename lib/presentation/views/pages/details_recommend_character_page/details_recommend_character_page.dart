@@ -1,38 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
 import 'package:marvel/domain/entities/character_entity.dart';
-import 'package:marvel/presentation/components/recommends_characters_component.dart';
-import 'package:marvel/presentation/controllers/character_controller.dart';
-import 'package:marvel/presentation/loaders/recommends_characters_loader.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 
-class DetailsCharacterPage extends StatefulWidget {
+class DetailsRecommendCharacterPage extends StatefulWidget {
   final CharacterEntity character;
-  const DetailsCharacterPage({super.key, required this.character});
+  const DetailsRecommendCharacterPage({super.key, required this.character});
 
   @override
-  State<DetailsCharacterPage> createState() => _DetailsCharacterPageState();
+  State<DetailsRecommendCharacterPage> createState() => _DetailsRecommendCharacterPageState();
 }
 
-class _DetailsCharacterPageState extends State<DetailsCharacterPage> {
-
-  final _characterController = GetIt.I.get<CharacterController>();
-
-
-  @override
-  void initState() {
-    _characterController.getRecommends(characterId: widget.character.id ?? 110369 /* ID DO CAPTAIN AMERICA */);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    //_characterController.dispose();
-    super.dispose();
-  }
+class _DetailsRecommendCharacterPageState extends State<DetailsRecommendCharacterPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +65,10 @@ class _DetailsCharacterPageState extends State<DetailsCharacterPage> {
                         horizontal: ConstsUtils.defaultPadding
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: context.sizedDevice.height / 10,),
-
                           Text(
                             (widget.character.name ?? "").toUpperCase(),
                             style: TextStyle(
@@ -106,35 +85,12 @@ class _DetailsCharacterPageState extends State<DetailsCharacterPage> {
                               fontFamily: ConstsUtils.fRegular,
                               fontSize: context.sizedDevice.height / 45
                             ),
-                          ),
-                          const SizedBox(height: 20,),
+                          ),                          
                           
-                          Text(
-                            "Personagens relacionados".toUpperCase(),
-                            style: TextStyle(
-                              fontFamily: ConstsUtils.fBold,
-                              fontSize: context.sizedDevice.height / 50,
-                              color: ConstsUtils.primaryColor
-                            ),
-                          ),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: context.sizedDevice.height / 6,
-                      width: context.sizedDevice.width,
-                      child: Obx(
-                        () {
-                          if(_characterController.isLoadingRecommends.value) {
-                            return const RecommendsCharactersLoader();
-
-                          } else {
-                            return RecommendsCharactersComponent(characters: _characterController.charactersRecommends);
-                          
-                          }
-                        }
-                      )
-                    )
+                    
                   ],
                 ),
               ),

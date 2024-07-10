@@ -5,6 +5,7 @@ import 'package:marvel/presentation/components/card_character_componet.dart';
 import 'package:marvel/presentation/components/item_pagination_component.dart';
 import 'package:marvel/presentation/components/search_textfield_component.dart';
 import 'package:marvel/presentation/controllers/character_controller.dart';
+import 'package:marvel/presentation/loaders/home_loader.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _characterController.getCharacters(offset: 0);
+    _characterController.getCharacters(offset: offset);
     super.initState();
   }
 
@@ -37,11 +38,7 @@ class _HomePageState extends State<HomePage> {
     return Obx(
       () {
         if(_characterController.isLoading.value && _characterController.characters.isEmpty) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return const HomeLoader();
 
         } else {
           return Scaffold(
@@ -58,14 +55,16 @@ class _HomePageState extends State<HomePage> {
                   const SearchTextfieldComponent(),
               
                   Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 20
+                    child: _characterController.isLoading.value 
+                    ? const HomeLoader(showOnlyCharacters: true,)
+                    : ListView(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20
+                        ),
+                        children: _characterController.characters.map(
+                          (character) => CardCharactersComponent(character: character,)
+                        ).toList()
                       ),
-                      children: _characterController.characters.map(
-                        (character) => CardCharactersComponent(characterEntity: character,)
-                      ).toList()
-                    ),
                   )
                 ],
               ),
