@@ -45,31 +45,29 @@ class _HomePageState extends State<HomePage> {
 
         } else {
           return Scaffold(
-            body: SizedBox(
+            body: Container(
               height: context.sizedDevice.height,
               width: context.sizedDevice.width,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 60,
-                  right: 16,
-                  left: 16
-                ),
-                child: Column(
-                  children: [
-                    const SearchTextfieldComponent(),
-                
-                    Expanded(
-                      child: ListView(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20
-                        ),
-                        children: _characterController.characters.map(
-                          (character) => CardCharactersComponent(characterEntity: character,)
-                        ).toList()
+              padding: const EdgeInsets.only(
+                top: 60,
+                right: 16,
+                left: 16
+              ),
+              child: Column(
+                children: [
+                  const SearchTextfieldComponent(),
+              
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 20
                       ),
-                    )
-                  ],
-                ),
+                      children: _characterController.characters.map(
+                        (character) => CardCharactersComponent(characterEntity: character,)
+                      ).toList()
+                    ),
+                  )
+                ],
               ),
             ),
           
