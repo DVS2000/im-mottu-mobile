@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:marvel/domain/entities/character_entity.dart';
-import 'package:marvel/presentation/views/pages/details_character_page/details_character_page.dart';
 import 'package:marvel/presentation/views/pages/details_recommend_character_page/details_recommend_character_page.dart';
 import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';

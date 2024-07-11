@@ -26,11 +26,11 @@ class ClientHttpDriverImp implements ClientHttpDriver {
         );
         
       } else {
-       return Response("{\"code\": 511, \"detail\": \"Sem internet\"}", 511);
+       return Response("{\"code\": 511, \"message\": \"Sem internet\"}", 511);
       }
 
     } catch (e) {
-      return Response("{\"code\": 500, \"detail\": \"Ocorreu um erro interno\"}", 500);
+      return Response("{\"code\": 500, \"message\": \"Ocorreu um erro interno\"}", 500);
 
     } 
   }

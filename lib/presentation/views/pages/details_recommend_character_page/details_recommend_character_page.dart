@@ -56,42 +56,44 @@ class _DetailsRecommendCharacterPageState extends State<DetailsRecommendCharacte
                     ]
                   )
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: ConstsUtils.defaultPadding
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: context.sizedDevice.height / 10,),
-                          Text(
-                            (widget.character.name ?? "").toUpperCase(),
-                            style: TextStyle(
-                              fontFamily: ConstsUtils.fBold,
-                              fontSize: context.sizedDevice.height / 30
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: ConstsUtils.defaultPadding
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: context.sizedDevice.height / 10,),
+                            Text(
+                              (widget.character.name ?? "").toUpperCase(),
+                              style: TextStyle(
+                                fontFamily: ConstsUtils.fBold,
+                                fontSize: context.sizedDevice.height / 30
+                              ),
                             ),
-                          ),
-                          
-                          Text(
-                             widget.character.description == null || widget.character.description == ""
-                              ? "Sem descrição disponível"
-                              : widget.character.description ?? "Sem descrição disponível",
-                            style: TextStyle(
-                              fontFamily: ConstsUtils.fRegular,
-                              fontSize: context.sizedDevice.height / 45
-                            ),
-                          ),                          
-                          
-                        ],
+                            
+                            Text(
+                               widget.character.description == null || widget.character.description == ""
+                                ? "Sem descrição disponível"
+                                : widget.character.description ?? "Sem descrição disponível",
+                              style: TextStyle(
+                                fontFamily: ConstsUtils.fRegular,
+                                fontSize: context.sizedDevice.height / 45
+                              ),
+                            ),                          
+                            
+                          ],
+                        ),
                       ),
-                    ),
-                    
-                  ],
+                      
+                    ],
+                  ),
                 ),
               ),
             ),

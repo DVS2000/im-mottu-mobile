@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final _characterController = GetIt.I.get<CharacterController>();
+  final _txtSearchController = TextEditingController();
   int offset = 0;
 
   @override
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if(_characterController.isLoading.value && _characterController.characters.isEmpty) {
+        if(_characterController.isLoading.value && _characterController.characters.value.characters!.isEmpty) {
           return const HomeLoader();
 
         } else {
@@ -52,7 +53,16 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Column(
                 children: [
-                  const SearchTextfieldComponent(),
+                  SearchTextfieldComponent(
+                    controller: _txtSearchController,
+                    onSubmitted: (value) {
+                      setState(() => offset = 0);
+                      _characterController.searchByName(name: value, offset: offset);
+                    },
+                    onClosed: () {
+                      _characterController.getCharacters(offset: offset);
+                    },
+                  ),
               
                   Expanded(
                     child: _characterController.isLoading.value 
@@ -61,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(
                           vertical: 20
                         ),
-                        children: _characterController.characters.map(
+                        children: _characterController.characters.value.characters!.map(
                           (character) => CardCharactersComponent(character: character,)
                         ).toList()
                       ),
@@ -90,21 +100,34 @@ class _HomePageState extends State<HomePage> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.only(left: 10),
-                child: Row(
-                  children: List.generate(
-                    50, // COM ESSE NUMERO DE PÁGINA CONSEGUIMOS CHEGAR ATÉ O HEROI 1000 DA LISTA DE HEROIS
-                    (index) => ItemPaginationComponent(
-                      index: index, 
-                      selected: index == offset,
-                      onTap: () {
-                        if(index != offset && !_characterController.isLoading.value) {
-                          setState(() => offset = index);
-                          _characterController.getCharacters(
-                            offset: index == 0 ? 0 : index * 20
-                          );
-                        }
-                      },
-                    )
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: List.generate(
+                      (_characterController.characters.value.total! / 20).ceil(), // COM ESSE NUMERO DE PÁGINA CONSEGUIMOS CHEGAR ATÉ O HEROI 1000 DA LISTA DE HEROIS
+                      (index) => ItemPaginationComponent(
+                        index: index, 
+                        selected: index == offset,
+                        onTap: () {
+                          if(index != offset && !_characterController.isLoading.value) {
+                            setState(() => offset = index);
+
+                            if (_txtSearchController.text.trim().isEmpty) {
+                              _characterController.getCharacters(
+                                offset: index == 0 ? 0 : index * 20
+                              );
+
+                            } else {
+                              _characterController.searchByName(
+                                name: _txtSearchController.text.trim(), 
+                                offset: offset
+                              );
+                            }
+                          }
+                        },
+                      )
+                    ),
                   ),
                 ),
               ),

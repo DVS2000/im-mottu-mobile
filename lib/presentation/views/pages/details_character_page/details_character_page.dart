@@ -76,66 +76,68 @@ class _DetailsCharacterPageState extends State<DetailsCharacterPage> {
                     ]
                   )
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: ConstsUtils.defaultPadding
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: ConstsUtils.defaultPadding
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: context.sizedDevice.height / 10,),
+                  
+                            Text(
+                              (widget.character.name ?? "").toUpperCase(),
+                              style: TextStyle(
+                                fontFamily: ConstsUtils.fBold,
+                                fontSize: context.sizedDevice.height / 30
+                              ),
+                            ),
+                            
+                            Text(
+                               widget.character.description == null || widget.character.description == ""
+                                ? "Sem descrição disponível"
+                                : widget.character.description ?? "Sem descrição disponível",
+                              style: TextStyle(
+                                fontFamily: ConstsUtils.fRegular,
+                                fontSize: context.sizedDevice.height / 45
+                              ),
+                            ),
+                            const SizedBox(height: 20,),
+                            
+                            Text(
+                              "Personagens relacionados".toUpperCase(),
+                              style: TextStyle(
+                                fontFamily: ConstsUtils.fBold,
+                                fontSize: context.sizedDevice.height / 50,
+                                color: ConstsUtils.primaryColor
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: context.sizedDevice.height / 10,),
-
-                          Text(
-                            (widget.character.name ?? "").toUpperCase(),
-                            style: TextStyle(
-                              fontFamily: ConstsUtils.fBold,
-                              fontSize: context.sizedDevice.height / 30
-                            ),
-                          ),
-                          
-                          Text(
-                             widget.character.description == null || widget.character.description == ""
-                              ? "Sem descrição disponível"
-                              : widget.character.description ?? "Sem descrição disponível",
-                            style: TextStyle(
-                              fontFamily: ConstsUtils.fRegular,
-                              fontSize: context.sizedDevice.height / 45
-                            ),
-                          ),
-                          const SizedBox(height: 20,),
-                          
-                          Text(
-                            "Personagens relacionados".toUpperCase(),
-                            style: TextStyle(
-                              fontFamily: ConstsUtils.fBold,
-                              fontSize: context.sizedDevice.height / 50,
-                              color: ConstsUtils.primaryColor
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: context.sizedDevice.height / 6,
-                      width: context.sizedDevice.width,
-                      child: Obx(
-                        () {
-                          if(_characterController.isLoadingRecommends.value) {
-                            return const RecommendsCharactersLoader();
-
-                          } else {
-                            return RecommendsCharactersComponent(characters: _characterController.charactersRecommends);
-                          
+                      SizedBox(
+                        height: context.sizedDevice.height / 6,
+                        width: context.sizedDevice.width,
+                        child: Obx(
+                          () {
+                            if(_characterController.isLoadingRecommends.value) {
+                              return const RecommendsCharactersLoader();
+                  
+                            } else {
+                              return RecommendsCharactersComponent(characters: _characterController.charactersRecommends);
+                            
+                            }
                           }
-                        }
+                        )
                       )
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

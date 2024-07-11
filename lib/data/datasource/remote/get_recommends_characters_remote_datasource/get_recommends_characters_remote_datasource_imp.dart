@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:marvel/configs/app_config.dart';
 import 'package:marvel/domain/entities/character_entity.dart';
 import 'package:marvel/domain/exceptions/character_exception.dart';
@@ -27,20 +27,24 @@ class GetRecommendsCharactersRemoteDatasourceImp implements GetRecommendsCharact
 
       for (var comic in comics) {
         for (var character in comic['characters']['items']) {
-          if(!recommendsCharacters.contains(character['name'])) {
+          if(recommendsCharacters.where((element) => element.name == character['name']).isEmpty) {
 
-          final characterUrl = '${character['resourceURI']}?ts=$ts&apikey=${AppConfigs.marvelPublicKey}&hash=$hash';
-          final characterResponse = await http.get(Uri.parse(characterUrl));
-          final characterData = json.decode(characterResponse.body);
-
-            recommendsCharacters.add(
-              CharacterEntity(
-                name: characterData['data']['results'][0]['name'],
-                thumbnailPath: characterData['data']['results'][0]['thumbnail']['path'],
-                thumbnailExtension: characterData['data']['results'][0]['thumbnail']['extension'],
-                description: characterData['data']['results'][0]['description']
-              )
-            );
+          try {
+              final characterUrl = '${character['resourceURI']}?ts=$ts&apikey=${AppConfigs.marvelPublicKey}&hash=$hash';
+              final characterResponse = await http.get(Uri.parse(characterUrl));
+              final characterData = json.decode(characterResponse.body);
+              
+                recommendsCharacters.add(
+                  CharacterEntity(
+                    name: characterData['data']['results'][0]['name'],
+                    thumbnailPath: characterData['data']['results'][0]['thumbnail']['path'],
+                    thumbnailExtension: characterData['data']['results'][0]['thumbnail']['extension'],
+                    description: characterData['data']['results'][0]['description']
+                  )
+                );
+            } on Exception catch (e) {
+              debugPrint(e.toString());
+            }
           }
         }
       }
@@ -48,7 +52,7 @@ class GetRecommendsCharactersRemoteDatasourceImp implements GetRecommendsCharact
       return Right(recommendsCharacters);
 
     } else {
-      return Left(CharacterException(response.statusCode, "Ocorreu um erro, tente mais tarde"));
+      return Left(CharacterException(response.statusCode, json.decode(response.body)["message"]));
       
     }
   }
