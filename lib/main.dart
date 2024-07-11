@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:marvel/drivers/injects/injects.dart';
+import 'package:marvel/firebase_options.dart';
 import 'package:marvel/presentation/views/app_view.dart';
 
 void main() async {
@@ -25,6 +27,10 @@ void main() async {
   await Hive.initFlutter();
 
   Inject.init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   
   runApp(const AppView());
 }

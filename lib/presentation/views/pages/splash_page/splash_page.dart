@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marvel/presentation/components/custom_button_component.dart';
@@ -8,7 +8,10 @@ import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  const SplashPage({super.key, required this.analytics, required this.observer});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -112,7 +115,12 @@ class _SplashPageState extends State<SplashPage> {
 
                   CustomButtonComponent(
                     title: "Começar a Aventura",
-                    onTap: () => Get.to(const HomePage()),
+                    onTap: () => Get.to(
+                      HomePage(
+                        analytics: widget.analytics,
+                        observer: widget.observer,
+                      )
+                    ),
                   ),
                 ],
               ),

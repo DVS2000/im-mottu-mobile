@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,10 @@ import 'package:marvel/presentation/views/utils/consts_util.dart';
 import 'package:marvel/presentation/views/utils/size_extesion_util.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  const HomePage({super.key, required this.analytics, required this.observer});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,6 +52,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _logSearchEvent(String query) async {
+    await widget.analytics.logSearch(
+      searchTerm: query
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -70,9 +80,10 @@ class _HomePageState extends State<HomePage> {
                   SearchTextfieldComponent(
                     controller: _txtSearchController,
                     onSubmitted: (value) {
-                      if(value.trim().isNotEmpty) {
+                      if (value.trim().isNotEmpty) {
                         setState(() => offset = 0);
                         _characterController.searchByName(name: value, offset: offset);
+                        _logSearchEvent(value);
                       }
                     },
                     onClosed: () {

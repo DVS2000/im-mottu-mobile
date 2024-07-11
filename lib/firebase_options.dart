@@ -56,6 +56,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '270007489345',
     projectId: 'mottu-app',
     storageBucket: 'mottu-app.appspot.com',
+    androidClientId: 'com.mottu.marvel' 
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

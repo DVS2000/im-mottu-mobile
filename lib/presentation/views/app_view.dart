@@ -1,4 +1,5 @@
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marvel/presentation/views/pages/splash_page/splash_page.dart';
@@ -20,6 +21,9 @@ class _AppViewState extends State<AppView>  with WidgetsBindingObserver {
     await store.clean();
   }
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -35,10 +39,14 @@ class _AppViewState extends State<AppView>  with WidgetsBindingObserver {
     return GetMaterialApp(
       title: "Marvel App",
       debugShowCheckedModeBanner: false,
+      navigatorObservers: <NavigatorObserver>[observer],
       theme: ThemeData.light().copyWith(
         primaryColor: ConstsUtils.primaryColor
       ),
-      home: const SplashPage(),
+      home: SplashPage(
+        analytics: analytics,
+        observer: observer,
+      ),
     );
   }
 }
