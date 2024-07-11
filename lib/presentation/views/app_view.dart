@@ -24,7 +24,7 @@ class _AppViewState extends State<AppView>  with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.detached) {
-      // QUANDO O APLICATIVO É FECHADO TENHO QUE LIMPAR TODO CACHE
+      /* QUANDO O APLICATIVO É FECHADO TENHO QUE LIMPAR TODOS CACHE */
       clearCache();
     }
     super.didChangeAppLifecycleState(state);
