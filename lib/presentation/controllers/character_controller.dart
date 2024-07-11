@@ -20,7 +20,7 @@ class CharacterController extends GetxController {
   RxBool isLoading           = false.obs;
   RxBool isLoadingRecommends = false.obs;
 
-  Rx<CharactersEntity> characters            = CharactersEntity(total: 0, characters: []).obs;
+  Rx<CharactersEntity> characters               = CharactersEntity(total: 0, characters: []).obs;
   RxList<CharacterEntity> charactersRecommends  = <CharacterEntity>[].obs;
 
 

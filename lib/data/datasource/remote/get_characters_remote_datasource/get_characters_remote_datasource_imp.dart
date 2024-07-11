@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:marvel/configs/app_config.dart';
 import 'package:marvel/data/dtos/characters_dto.dart';
@@ -20,11 +19,11 @@ class GetCharactersRemoteDatasourceImp implements GetCharactersRemoteDatasource 
 
     if(response.statusCode == 200) {
       return Right(
-        CharactersDto.fromJson(json.decode(response.body)["data"])
+        CharactersDto.fromJson(response.data["data"])
       );
 
     } else {
-      return Left(CharacterException(response.statusCode, json.decode(response.body)["message"]));
+      return Left(CharacterException(response.statusCode ?? 500, response.data["message"]));
       
     }
   }
