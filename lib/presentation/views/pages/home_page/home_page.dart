@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    _characterController.dispose();
+    //_characterController.dispose();
     super.dispose();
   }
 
@@ -56,8 +56,10 @@ class _HomePageState extends State<HomePage> {
                   SearchTextfieldComponent(
                     controller: _txtSearchController,
                     onSubmitted: (value) {
-                      setState(() => offset = 0);
-                      _characterController.searchByName(name: value, offset: offset);
+                      if(value.trim().isNotEmpty) {
+                        setState(() => offset = 0);
+                        _characterController.searchByName(name: value, offset: offset);
+                      }
                     },
                     onClosed: () {
                       _characterController.getCharacters(offset: offset);

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:marvel/drivers/injects/injects.dart';
 import 'package:marvel/presentation/views/app_view.dart';
 
-void main() {
+void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -20,6 +21,8 @@ void main() {
       DeviceOrientation.portraitUp
     ]
   );
+
+  await Hive.initFlutter();
 
   Inject.init();
   

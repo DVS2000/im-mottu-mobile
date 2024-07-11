@@ -34,6 +34,7 @@ class CharacterController extends GetxController {
           title: l.code.toString(),
           message: l.message,
           backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
         )
       ), 
       (r) => characters.value = r
@@ -52,6 +53,7 @@ class CharacterController extends GetxController {
           title: l.code.toString(),
           message: l.message,
           backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
         )
       ), 
       (r) => charactersRecommends.value = r
@@ -70,6 +72,7 @@ class CharacterController extends GetxController {
           title: l.code.toString(),
           message: l.message,
           backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
         )
       ), 
       (r) => characters.value = r

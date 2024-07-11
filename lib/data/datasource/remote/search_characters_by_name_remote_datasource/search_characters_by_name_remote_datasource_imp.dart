@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:marvel/configs/app_config.dart';
 import 'package:marvel/data/dtos/characters_dto.dart';
@@ -23,7 +25,7 @@ class SearchCharactersByNameRemoteDatasourceImp implements SearchCharactersByNam
       );
 
     } else {
-      return Left(CharacterException(response.statusCode ?? 500, response.data["message"]));
+      return Left(CharacterException(response.statusCode ?? 500, json.decode(response.data)["message"]));
       
     }
   }

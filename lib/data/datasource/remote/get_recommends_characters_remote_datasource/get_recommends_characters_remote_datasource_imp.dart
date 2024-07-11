@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +53,7 @@ class GetRecommendsCharactersRemoteDatasourceImp implements GetRecommendsCharact
       return Right(recommendsCharacters);
 
     } else {
-      return Left(CharacterException(response.statusCode ?? 500, response.data["message"]));
+      return Left(CharacterException(response.statusCode ?? 500, json.decode(response.data)["message"]));
       
     }
   }
