@@ -69,14 +69,17 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: _characterController.isLoading.value 
                     ? const HomeLoader(showOnlyCharacters: true,)
-                    : ListView(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20
+                    : RefreshIndicator(
+                      onRefresh: () => _characterController.getCharacters(offset: offset),
+                      child: ListView(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20
+                          ),
+                          children: _characterController.characters.value.characters!.map(
+                            (character) => CardCharactersComponent(character: character,)
+                          ).toList()
                         ),
-                        children: _characterController.characters.value.characters!.map(
-                          (character) => CardCharactersComponent(character: character,)
-                        ).toList()
-                      ),
+                    ),
                   )
                 ],
               ),
