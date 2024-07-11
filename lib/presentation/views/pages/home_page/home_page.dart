@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marvel/presentation/components/card_character_componet.dart';
@@ -18,6 +22,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  static const MethodChannel _channel = MethodChannel('internet_checker_channel');
+
+  String _connectionStatus = 'Online';
+
   final _characterController = GetIt.I.get<CharacterController>();
   final _txtSearchController = TextEditingController();
   int offset = 0;
@@ -25,13 +33,23 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _characterController.getCharacters(offset: offset);
+    _channel.setMethodCallHandler(_handleMethodCall);
     super.initState();
   }
 
-  @override
-  void dispose() {
-    //_characterController.dispose();
-    super.dispose();
+
+  Future<void> _handleMethodCall(MethodCall call) async {
+    if (call.method == 'updateConnectionStatus') {
+      log(call.arguments);
+      Get.showSnackbar(
+        GetSnackBar(
+          title: "Estado da internet",
+          message: call.arguments,
+          backgroundColor: call.arguments.toString() == "online" ? Colors.green : Colors.red,
+          duration: const Duration(seconds: 3),
+        )
+      );
+    }
   }
 
   @override
