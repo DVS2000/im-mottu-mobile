@@ -79,7 +79,7 @@
 - Criar channel em kotlin, capturar a mudança de conexão, e mostrar uma mensagem de offline no flutter.
 
 # SCREENSHOOTS
-![Splash Page](scrrenshoots/img1.jpg)
+![Splash Page](screenshoots/img1.jpg)
 ![Home Page](scrrenshoots/img2.jpg)
 ![Search Page](scrrenshoots/img3.jpg)
 ![Character Page](scrrenshoots/img4.jpg)
