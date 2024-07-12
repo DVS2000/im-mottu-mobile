@@ -53,3 +53,19 @@
 - Firebase Analytics
 - Kotlin (via MethodChannel)
 - Marvel API
+
+# SCREENSHOOTS
+
+<table>
+  <tr>
+    <td><img src="screenshoots/img1.jpg" alt="Splash page" width="200"/></td>
+    <td><img src="screenshoots/img5.jpg" alt="Splash page" width="200"/></td>
+    <td><img src="screenshoots/img2.jpg" alt="Home page" width="200"/></td>
+  </tr>
+
+  <tr>
+    <td><img src="screenshoots/img3.jpg" alt="Search page" width="200"/></td>
+    <td><img src="screenshoots/img4.jpg" alt="Character page" width="200"/></td>
+  </tr>
+</table>
+
