@@ -80,6 +80,6 @@
 
 # SCREENSHOOTS
 ![Splash Page](screenshoots/img1.jpg)
-![Home Page](scrrenshoots/img2.jpg)
-![Search Page](scrrenshoots/img3.jpg)
-![Character Page](scrrenshoots/img4.jpg)
+![Home Page](screenshoots/img2.jpg)
+![Search Page](screenshoots/img3.jpg)
+![Character Page](screenshoots/img4.jpg)
