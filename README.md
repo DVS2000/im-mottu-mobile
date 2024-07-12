@@ -79,7 +79,16 @@
 - Criar channel em kotlin, capturar a mudança de conexão, e mostrar uma mensagem de offline no flutter.
 
 # SCREENSHOOTS
-![Splash Page](screenshoots/img1.jpg)
-![Home Page](screenshoots/img2.jpg)
-![Search Page](screenshoots/img3.jpg)
-![Character Page](screenshoots/img4.jpg)
+
+<table>
+  <tr>
+    <td><img src="screenshoots/img1.jpg" alt="Splash page" width="200"/></td>
+    <td><img src="screenshoots/img2.jpg" alt="Home page" width="200"/></td>
+  </tr>
+
+  <tr>
+    <td><img src="screenshoots/img3.jpg" alt="Search page" width="200"/></td>
+    <td><img src="screenshoots/img4.jpg" alt="Character page" width="200"/></td>
+  </tr>
+</table>
+
