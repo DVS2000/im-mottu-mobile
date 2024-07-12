@@ -83,6 +83,7 @@
 <table>
   <tr>
     <td><img src="screenshoots/img1.jpg" alt="Splash page" width="200"/></td>
+    <td><img src="screenshoots/img5.jpg" alt="Splash page" width="200"/></td>
     <td><img src="screenshoots/img2.jpg" alt="Home page" width="200"/></td>
   </tr>
 
