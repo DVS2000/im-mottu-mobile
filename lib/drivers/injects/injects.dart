@@ -22,8 +22,6 @@ import 'package:marvel/drivers/client_http_driver/client_http_driver_imp.dart';
 import 'package:marvel/presentation/controllers/character_controller.dart';
 
 class Inject {
-  Inject._();
-
   static init() {
     GetIt getIt = GetIt.instance;
 

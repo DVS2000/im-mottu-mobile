@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                     child: _characterController.isLoading.value 
                     ? const HomeLoader(showOnlyCharacters: true,)
                     : RefreshIndicator(
-                      onRefresh: () => _characterController.getCharacters(offset: offset),
+                      onRefresh: () => _characterController.getCharacters(offset: offset == 0 ? 0 : offset * 20),
                       child: ListView(
                           padding: const EdgeInsets.symmetric(
                             vertical: 20
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: List.generate(
-                      (_characterController.characters.value.total! / 20).ceil(), // COM ESSE NUMERO DE PÁGINA CONSEGUIMOS CHEGAR ATÉ O HEROI 1000 DA LISTA DE HEROIS
+                      (_characterController.characters.value.total! / 20).ceil(),
                       (index) => ItemPaginationComponent(
                         index: index, 
                         selected: index == offset,
