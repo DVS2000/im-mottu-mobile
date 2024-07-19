@@ -4,9 +4,6 @@ import 'package:crypto/crypto.dart';
 
 class AppConfigs {
 
-  /* INSTÂNCIA PRIVADA PARA USAR O PADRÃO SINGLETON */
-  AppConfigs._();
-
   static const baseUrl = "https://gateway.marvel.com:443";
   static const apiUrl  = "$baseUrl/v1/public";
 
