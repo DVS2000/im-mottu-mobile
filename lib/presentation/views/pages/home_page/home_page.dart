@@ -111,8 +111,8 @@ class _HomePageState extends State<HomePage> {
             ),
           
             bottomNavigationBar: Container(
-              height: 60,
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              height: 85,
+              padding: const EdgeInsets.symmetric(vertical: 22,),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.only(
@@ -127,10 +127,10 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]
               ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(left: 10),
-                child: Center(
+              child: Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,12 +142,12 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           if(index != offset && !_characterController.isLoading.value) {
                             setState(() => offset = index);
-
+                  
                             if (_txtSearchController.text.trim().isEmpty) {
                               _characterController.getCharacters(
                                 offset: index == 0 ? 0 : index * 20
                               );
-
+                  
                             } else {
                               _characterController.searchByName(
                                 name: _txtSearchController.text.trim(), 
